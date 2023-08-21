@@ -45,18 +45,15 @@ void Framework::Initialize(DirectXCommon* dxCommon)
 	assert(dxcommon);
 	assert(input);
 	assert(audio);
-	const int debugTextTexNumber = 0;
 	IKESprite::StaticInitialize(dxcommon->GetDev(), dxcommon->GetCmdList(), WinApp::window_width, WinApp::window_height);
-	// デバッグテキスト用テクスチャ読み込み
-	if (!IKESprite::LoadTexture(debugTextTexNumber, L"Resources/2d/debugfont.png")) {
-		assert(0);
-		return;
-	}
+	//// デバッグテキスト用テクスチャ読み込み
+	//if (!IKESprite::LoadTexture(debugTextTexNumber, L"Resources/2d/debugfont.png")) {
+	//	assert(0);
+	//	return;
+	//}
 	// ライト静的初期化
 	LightGroup::StaticInitialize(dxcommon->GetDev());
 	// デバッグテキスト初期化
-	debugText = DebugText::GetInstance();
-	debugText->Initialize(debugTextTexNumber);
 
 	IKEObject3d::StaticInitialize(dxcommon->GetDev(), dxcommon->GetCmdList(), WinApp::window_width, WinApp::window_height);
 	IKETexture::StaticInitialize(dxcommon->GetDev(), dxcommon->GetCmdList(), WinApp::window_width, WinApp::window_height);
