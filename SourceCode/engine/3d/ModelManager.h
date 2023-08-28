@@ -14,7 +14,8 @@ private:
 public:
 	//OBJの名前
 	enum ModelName {
-	
+		GROUND,
+		PLAYERMODEL,
 	};
 	//FBXの名前
 	enum FBXName {

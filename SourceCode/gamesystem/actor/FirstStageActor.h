@@ -23,5 +23,12 @@ private:
 	void MainUpdate(DebugCamera* camera)override;		//バトルシーン
 	void FinishUpdate(DebugCamera* camera)override;		//撃破シーン
 
+	void ImGuiDraw();
+
+private:
+	unique_ptr<IKEObject3d> ground;
+	IKEModel* model;
+	unique_ptr<IKEObject3d> knight;
+	XMFLOAT2 m_AddOffset = {};
 };
 

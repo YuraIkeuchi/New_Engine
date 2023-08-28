@@ -11,6 +11,8 @@ void CameraWork::SplineSet() {
 }
 //XV
 void CameraWork::Update(DebugCamera* camera) {
+	camera->SetEye({ 0.0f,10.0f,-20.0f });
+	camera->SetTarget({ 0.0f,0.0f,0.0f });
 	camera->Update();
 }
 void CameraWork::ImGuiDraw() {

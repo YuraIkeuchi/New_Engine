@@ -10,9 +10,9 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	//共通の初期化
 	BaseInitialize(dxCommon);
 	//オーディオ
-	Audio::GetInstance()->LoopWave(AUDIO_BATTLE, VolumManager::GetInstance()->GetBGMVolum() + 1.0f);
+	//Audio::GetInstance()->LoopWave(AUDIO_BATTLE, VolumManager::GetInstance()->GetBGMVolum() + 1.0f);
 	//ポストエフェクト
-	PlayPostEffect = true;
+	PlayPostEffect = false;
 	//パーティクル全削除
 	ParticleEmitter::GetInstance()->AllDelete();
 
@@ -20,6 +20,19 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 
 	lightgroup->SetCircleShadowActive(0, true);
 	lightgroup->SetCircleShadowActive(1, true);
+
+	ground.reset(new IKEObject3d());
+	ground->Initialize();
+	ground->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::GROUND));
+	ground->SetScale({ 2.f,1.f,2.f });
+	ground->SetPosition({ 0.0f,-10.0f,0.0f });
+	ground->SetAddOffset(3.0f);
+
+	knight.reset(new IKEObject3d());
+	knight->Initialize();
+	knight->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::PLAYERMODEL));
+	knight->SetScale({ 2.f,2.f,2.f });
+	knight->SetPosition({ 0.0f,0.0f,0.0f });
 }
 
 void FirstStageActor::Finalize() {
@@ -28,7 +41,12 @@ void FirstStageActor::Finalize() {
 void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	//関数ポインタで状態管理
 	(this->*stateTable[static_cast<size_t>(m_SceneState)])(camera);
-
+	camerawork->Update(camera);
+	ground->Update();
+	knight->Update();
+	m_AddOffset.x = 0.001f;
+	ground->SetAddOffset(m_AddOffset.x);
+	lightgroup->Update();
 }
 
 void FirstStageActor::Draw(DirectXCommon* dxCommon) {
@@ -42,6 +60,7 @@ void FirstStageActor::Draw(DirectXCommon* dxCommon) {
 
 		dxCommon->PreDraw();
 		postEffect->Draw(dxCommon->GetCmdList());
+		ImGuiDraw();
 		dxCommon->PostDraw();
 	} else {
 		postEffect->PreDrawScene(dxCommon->GetCmdList());
@@ -50,26 +69,36 @@ void FirstStageActor::Draw(DirectXCommon* dxCommon) {
 		dxCommon->PreDraw();
 		BackDraw(dxCommon);
 		FrontDraw(dxCommon);
+		ImGuiDraw();
 		dxCommon->PostDraw();
 	}
 }
-
+//ポストエフェクトかからない
 void FirstStageActor::FrontDraw(DirectXCommon* dxCommon) {
 
 }
-
+//ポストエフェクトかかる
 void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
-
+	IKEObject3d::PreDraw();
+	ground->Draw();
+	knight->Draw();
+	IKEObject3d::PostDraw();
 }
-
+//導入しーんの更新
 void FirstStageActor::IntroUpdate(DebugCamera* camera) {
 
 }
-
+//プレイ中の更新
 void FirstStageActor::MainUpdate(DebugCamera* camera) {
 
 }
 
 void FirstStageActor::FinishUpdate(DebugCamera* camera) {
 	Input* input = Input::GetInstance();
+}
+
+void FirstStageActor::ImGuiDraw() {
+	ImGui::Begin("FIRST");
+	ImGui::Text("FIRST");
+	ImGui::End();
 }
