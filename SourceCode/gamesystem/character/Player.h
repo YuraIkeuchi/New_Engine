@@ -21,5 +21,15 @@ public:
 	void ImGuiDraw();
 	
 private:
+	XMFLOAT3 MoveVECTOR(XMVECTOR v, float angle);
+private:
 	void LoadCSV();
+
+private:
+	//移動方向指定用
+	float angle = 0.0f;
+	//歩きまたは走り状態
+	float velocity;
+	//移動加算値
+	float m_AddSpeed;
 };

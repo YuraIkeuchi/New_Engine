@@ -310,3 +310,7 @@ bool Helper::All_Of_float(float* list, int size, float standVal)
 
 	return false;
 }
+
+void Helper::SinMove(XMFLOAT3& pos, const float angle, const float angle2) {
+
+}

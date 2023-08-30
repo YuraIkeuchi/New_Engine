@@ -15,6 +15,7 @@ void TitleSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 }
 //更新
 void TitleSceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
+
 	camerawork->Update(camera);
 	Input* input = Input::GetInstance();
 	if ((input->TriggerButton(input->B))) {

@@ -38,5 +38,7 @@ public:
 	/// </summary>
 	virtual void Draw(DirectXCommon* dxCommon)override;
 
-	virtual void ImGuiDraw() = 0;
+	void ImGuiDraw();
+
+	virtual void ImGui_Origin() = 0;
 };

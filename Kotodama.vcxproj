@@ -173,6 +173,7 @@
     <ClCompile Include="SourceCode\gamesystem\actor\TutorialSceneActor.cpp" />
     <ClCompile Include="SourceCode\gamesystem\character\InterBoss.cpp" />
     <ClCompile Include="SourceCode\gamesystem\character\InterEnemy.cpp" />
+    <ClCompile Include="SourceCode\gamesystem\character\NormalEnemy.cpp" />
     <ClCompile Include="SourceCode\gamesystem\character\Player.cpp" />
     <ClCompile Include="SourceCode\gamesystem\gamecamera\CameraWork.cpp" />
     <ClCompile Include="SourceCode\gamesystem\MessageWindow\MessageWindow.cpp" />
@@ -268,6 +269,7 @@
     <ClInclude Include="SourceCode\gamesystem\actor\TutorialSceneActor.h" />
     <ClInclude Include="SourceCode\gamesystem\character\InterBoss.h" />
     <ClInclude Include="SourceCode\gamesystem\character\InterEnemy.h" />
+    <ClInclude Include="SourceCode\gamesystem\character\NormalEnemy.h" />
     <ClInclude Include="SourceCode\gamesystem\character\Player.h" />
     <ClInclude Include="SourceCode\gamesystem\gamecamera\CameraWork.h" />
     <ClInclude Include="SourceCode\gamesystem\MessageWindow\MessageWindow.h" />

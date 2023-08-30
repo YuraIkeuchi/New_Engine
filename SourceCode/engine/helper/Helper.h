@@ -46,6 +46,8 @@ public:
 
 	//’Ç]ŠÖ”
 	void FollowMove(XMFLOAT3& pos, const XMFLOAT3& pos2, const float vel);
+	//Sin”g
+	void SinMove(XMFLOAT3& pos, const float angle, const float angle2);
 	//‹——£‚ğ‘ª‚é
 	float ChechLength(const XMFLOAT3& pos, const XMFLOAT3& pos2);
 	//‰~‰^“®

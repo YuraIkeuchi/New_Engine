@@ -14,3 +14,7 @@ void InterEnemy::Update() {
 //描画
 void InterEnemy::Draw(DirectXCommon* dxCommon) {
 }
+
+void InterEnemy::ImGuiDraw() {
+	ImGui_Origin();
+}

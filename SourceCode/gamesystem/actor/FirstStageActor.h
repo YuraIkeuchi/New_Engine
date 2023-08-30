@@ -2,6 +2,7 @@
 #include"BaseActor.h"
 #include"BossText.h"
 #include "MessageWindow.h"
+#include "NormalEnemy.h"
 #include<windows.h>
 #include<vector>
 
@@ -28,8 +29,8 @@ private:
 private:
 	unique_ptr<IKEObject3d> ground;
 	IKEModel* model;
-	unique_ptr<IKEObject3d> knight;
 	unique_ptr<IKEObject3d> skydome;
 	XMFLOAT2 m_AddOffset = {};
+	unique_ptr<InterEnemy> enemy;
 };
 

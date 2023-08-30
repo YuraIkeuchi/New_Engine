@@ -2,7 +2,7 @@
 #include"Easing.h"
 #include "ParticleEmitter.h"
 #include "ImageManager.h"
-#include <algorithm>
+#include "Player.h"
 #include "Helper.h"
 
 void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
@@ -29,12 +29,7 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	ground->SetAddOffset(3.0f);
 	ground->VertexCheck();
 
-	knight.reset(new IKEObject3d());
-	knight->Initialize();
-	knight->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::PLAYERMODEL));
-	knight->SetScale({ 2.f,2.f,2.f });
-	knight->SetPosition({ 0.0f,0.0f,0.0f });
-	knight->VertexCheck();
+
 
 	skydome.reset(new IKEObject3d());
 	skydome->Initialize();
@@ -42,6 +37,13 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	skydome->SetScale({ 8.f,8.f,8.f });
 	skydome->SetPosition({ 0.0f,0.0f,0.0f });
 	skydome->VertexCheck();
+
+	Player::GetInstance()->LoadResource();
+	Player::GetInstance()->InitState({ 0.0f,0.0f,0.0f });
+	Player::GetInstance()->Initialize();
+
+	enemy.reset(new NormalEnemy());
+	enemy->Initialize();
 }
 
 void FirstStageActor::Finalize() {
@@ -52,10 +54,11 @@ void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 	(this->*stateTable[static_cast<size_t>(m_SceneState)])(camera);
 	camerawork->Update(camera);
 	ground->Update();
-	knight->Update();
 	skydome->Update();
 	m_AddOffset.x = 0.001f;
 	ground->SetAddOffset(m_AddOffset.x);
+	Player::GetInstance()->Update();
+	enemy->Update();
 	lightgroup->Update();
 }
 
@@ -91,8 +94,9 @@ void FirstStageActor::FrontDraw(DirectXCommon* dxCommon) {
 void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	IKEObject3d::PreDraw();
 	ground->Draw();
-	knight->Draw();
 	skydome->Draw();
+	Player::GetInstance()->Draw(dxCommon);
+	enemy->Draw(dxCommon);
 	IKEObject3d::PostDraw();
 }
 //導入しーんの更新
@@ -111,7 +115,9 @@ void FirstStageActor::FinishUpdate(DebugCamera* camera) {
 void FirstStageActor::ImGuiDraw() {
 	ImGui::Begin("FIRST");
 	ImGui::Text("GroundNum:%d",ground->GetVertexNum());
-	ImGui::Text("KnightNum:%d", knight->GetVertexNum());
 	ImGui::Text("SkydomeNum:%d", skydome->GetVertexNum());
 	ImGui::End();
+
+	enemy->ImGuiDraw();
+	Player::GetInstance()->ImGuiDraw();
 }
