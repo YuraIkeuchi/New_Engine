@@ -33,6 +33,12 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	knight->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::PLAYERMODEL));
 	knight->SetScale({ 2.f,2.f,2.f });
 	knight->SetPosition({ 0.0f,0.0f,0.0f });
+
+	skydome.reset(new IKEObject3d());
+	skydome->Initialize();
+	skydome->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SKYDOME));
+	skydome->SetScale({ 8.f,8.f,8.f });
+	skydome->SetPosition({ 0.0f,0.0f,0.0f });
 }
 
 void FirstStageActor::Finalize() {
@@ -44,6 +50,7 @@ void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 	camerawork->Update(camera);
 	ground->Update();
 	knight->Update();
+	skydome->Update();
 	m_AddOffset.x = 0.001f;
 	ground->SetAddOffset(m_AddOffset.x);
 	lightgroup->Update();
@@ -82,6 +89,7 @@ void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	IKEObject3d::PreDraw();
 	ground->Draw();
 	knight->Draw();
+	skydome->Draw();
 	IKEObject3d::PostDraw();
 }
 //導入しーんの更新

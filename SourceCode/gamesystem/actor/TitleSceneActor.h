@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include "BaseActor.h"
-#include "IKESprite.h"
-#include"Font.h"
 #include "Helper.h"
-#include "Feed.h"
+#include "TitleText.h"
+#include <memory>
+#include"Font.h"
 /// タイトルシーン
 class TitleSceneActor : public BaseActor {
 public:
@@ -17,6 +17,9 @@ public:
 	void Draw(DirectXCommon* dxCommon) override;
 	void BackDraw(DirectXCommon* dxCommon);
 	void ImGuiDraw(DirectXCommon* dxCommon);
-	void FrontDraw();
+	void FrontDraw(DirectXCommon* dxCommon);
 
+
+private:
+	unique_ptr<TitleText> text_;
 };

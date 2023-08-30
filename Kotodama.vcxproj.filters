@@ -300,9 +300,6 @@
     <ClCompile Include="SourceCode\gamesystem\text\TextManager.cpp">
       <Filter>gamesystem\Text</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\gamesystem\text\BossText.cpp">
-      <Filter>gamesystem\charactor\Boss\Text</Filter>
-    </ClCompile>
     <ClCompile Include="SourceCode\gamesystem\scene\SceneSave.cpp">
       <Filter>gamesystem\scene\Base</Filter>
     </ClCompile>
@@ -317,6 +314,9 @@
     </ClCompile>
     <ClCompile Include="SourceCode\gamesystem\MessageWindow\MessageWindow.cpp">
       <Filter>gamesystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\gamesystem\scenetext\TitleText.cpp">
+      <Filter>gamesystem\scenetext\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -574,9 +574,6 @@
       <Filter>gamesystem\Text</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\engine\enginebase\resource.h" />
-    <ClInclude Include="SourceCode\gamesystem\text\BossText.h">
-      <Filter>gamesystem\charactor\Boss\Text</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\gamesystem\scene\SceneSave.h">
       <Filter>gamesystem\scene\Base</Filter>
     </ClInclude>
@@ -597,6 +594,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\gamesystem\MessageWindow\MessageWindow.h">
       <Filter>gamesystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\gamesystem\scenetext\TitleText.h">
+      <Filter>gamesystem\scenetext\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -799,6 +799,12 @@
     </Filter>
     <Filter Include="gamesystem\scene\EndRoll">
       <UniqueIdentifier>{cc3076ca-66ef-4952-b4dc-38fbeb169a69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gamesystem\scenetext">
+      <UniqueIdentifier>{9eaf1084-af68-4c0b-ae15-27a98f530e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gamesystem\scenetext\Title">
+      <UniqueIdentifier>{459fc31c-7be8-4acf-96da-257822af3bfd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

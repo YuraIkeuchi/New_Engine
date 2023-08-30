@@ -8,6 +8,10 @@ void TitleSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	//共通の初期化
 	BaseInitialize(dxCommon);
 	dxCommon->SetFullScreen(true);
+
+	text_ = make_unique<TitleText>();
+	text_->Initialize(dxCommon);
+	text_->SelectText(TextManager::FIRST);
 }
 //更新
 void TitleSceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
@@ -23,7 +27,7 @@ void TitleSceneActor::Draw(DirectXCommon* dxCommon) {
 	if (PlayPostEffect) {
 		postEffect->PreDrawScene(dxCommon->GetCmdList());
 		BackDraw(dxCommon);
-		FrontDraw();
+		FrontDraw(dxCommon);
 		postEffect->PostDrawScene(dxCommon->GetCmdList());
 		dxCommon->PreDraw();
 		postEffect->Draw(dxCommon->GetCmdList());
@@ -35,13 +39,17 @@ void TitleSceneActor::Draw(DirectXCommon* dxCommon) {
 		postEffect->PostDrawScene(dxCommon->GetCmdList());
 		dxCommon->PreDraw();
 		BackDraw(dxCommon);
-		FrontDraw();
+		FrontDraw(dxCommon);
 		ImGuiDraw(dxCommon);
 		dxCommon->PostDraw();
 	}
 }
 //前面描画
-void TitleSceneActor::FrontDraw() {
+void TitleSceneActor::FrontDraw(DirectXCommon* dxCommon) {
+	//完全に前に書くスプライト
+	IKESprite::PreDraw();
+	text_->SpriteDraw(dxCommon);
+	IKESprite::PostDraw();
 }
 //背面描画
 void TitleSceneActor::BackDraw(DirectXCommon* dxCommon) {

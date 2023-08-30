@@ -29,6 +29,7 @@ private:
 	unique_ptr<IKEObject3d> ground;
 	IKEModel* model;
 	unique_ptr<IKEObject3d> knight;
+	unique_ptr<IKEObject3d> skydome;
 	XMFLOAT2 m_AddOffset = {};
 };
 

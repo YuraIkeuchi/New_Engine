@@ -16,6 +16,7 @@ public:
 	enum ModelName {
 		GROUND,
 		PLAYERMODEL,
+		SKYDOME,
 	};
 	//FBXの名前
 	enum FBXName {
