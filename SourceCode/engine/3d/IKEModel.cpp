@@ -291,6 +291,7 @@ void IKEModel::LoadModel(const std::string& modelname, bool smoothing)
 	}
 	file.close();
 
+	m_VertexNum = mesh->GetVertexCount();
 	// 頂点法線の平均によるエッジの平滑化
 	if (smoothing)
 	{

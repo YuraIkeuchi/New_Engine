@@ -305,10 +305,17 @@ bool IKEObject3d::Initialize()
 		IID_PPV_ARGS(&constBuffB0));
 	//クラス名の文字列を取得
 	name = typeid(*this).name();
-
+	
 	return true;
 }
-
+//頂点の数を調べる
+void IKEObject3d::VertexCheck() {
+	// モデルの割り当てがなければ通らない
+	if (model != nullptr)
+	{
+		m_VertexNum = model->GetVertexNum();
+	}
+}
 void IKEObject3d::Update()
 {
 	assert(camera);

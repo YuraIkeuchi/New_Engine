@@ -27,18 +27,21 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	ground->SetScale({ 2.f,1.f,2.f });
 	ground->SetPosition({ 0.0f,-10.0f,0.0f });
 	ground->SetAddOffset(3.0f);
+	ground->VertexCheck();
 
 	knight.reset(new IKEObject3d());
 	knight->Initialize();
 	knight->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::PLAYERMODEL));
 	knight->SetScale({ 2.f,2.f,2.f });
 	knight->SetPosition({ 0.0f,0.0f,0.0f });
+	knight->VertexCheck();
 
 	skydome.reset(new IKEObject3d());
 	skydome->Initialize();
 	skydome->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SKYDOME));
 	skydome->SetScale({ 8.f,8.f,8.f });
 	skydome->SetPosition({ 0.0f,0.0f,0.0f });
+	skydome->VertexCheck();
 }
 
 void FirstStageActor::Finalize() {
@@ -107,6 +110,8 @@ void FirstStageActor::FinishUpdate(DebugCamera* camera) {
 
 void FirstStageActor::ImGuiDraw() {
 	ImGui::Begin("FIRST");
-	ImGui::Text("FIRST");
+	ImGui::Text("GroundNum:%d",ground->GetVertexNum());
+	ImGui::Text("KnightNum:%d", knight->GetVertexNum());
+	ImGui::Text("SkydomeNum:%d", skydome->GetVertexNum());
 	ImGui::End();
 }

@@ -44,7 +44,8 @@ public: // メンバ関数
 /// </summary>
 /// <returns>メッシュコンテナ</returns>
 	const std::vector<IKEMesh*>& GetMeshes() { return meshes; }
-
+public:
+	const size_t& GetVertexNum() { return m_VertexNum; }
 
 private: // メンバ変数
 	// 名前
@@ -58,6 +59,7 @@ private: // メンバ変数
 	// デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeap;
 
+	size_t m_VertexNum = 0;
 private: // メンバ関数
 	//モデル読み込み
 	void LoadModel(const std::string& modelname, bool smoothing);

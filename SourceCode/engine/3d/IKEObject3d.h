@@ -126,6 +126,8 @@ public: // メンバ関数
 
 	virtual	bool Initialize();
 
+	void VertexCheck();
+
 	//毎フレーム処理
 	virtual void Update();
 
@@ -184,6 +186,7 @@ public: // メンバ関数
 
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
 
+	const size_t& GetVertexNum() { return m_VertexNum; }
 	//当たり判定セット
 	void SetCollider(BaseCollider* collider);
 
@@ -276,7 +279,8 @@ protected: // メンバ変数
 
 	//アフィン変換用
 	bool Affine = false;
-
+	//頂点の数
+	size_t m_VertexNum = 0;
 	//親子構造用
 	DirectX::XMMATRIX matrix = {};
 private:
