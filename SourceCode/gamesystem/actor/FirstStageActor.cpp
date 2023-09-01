@@ -21,6 +21,7 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	lightgroup->SetCircleShadowActive(0, true);
 	lightgroup->SetCircleShadowActive(1, true);
 
+	//地面
 	ground.reset(new IKEObject3d());
 	ground->Initialize();
 	ground->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::GROUND));
@@ -29,8 +30,7 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	ground->SetAddOffset(3.0f);
 	ground->VertexCheck();
 
-
-
+	//スカイドーム
 	skydome.reset(new IKEObject3d());
 	skydome->Initialize();
 	skydome->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SKYDOME));
@@ -38,12 +38,22 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	skydome->SetPosition({ 0.0f,0.0f,0.0f });
 	skydome->VertexCheck();
 
+	//プレイヤー
 	Player::GetInstance()->LoadResource();
 	Player::GetInstance()->InitState({ 0.0f,0.0f,0.0f });
 	Player::GetInstance()->Initialize();
 
+	//敵
 	enemy.reset(new NormalEnemy());
 	enemy->Initialize();
+
+	//テクスチャ
+	tex.reset(IKETexture::Create(ImageManager::MAGIC, { 0,0,0 }, { 0.5f,0.5f,0.5f }, { 1,1,1,1 }));
+	tex->TextureCreate();
+	tex->SetPosition({ 5.0f,2.0f,0.0f });
+	tex->SetScale({ 0.5f,0.5f,0.5f });
+	tex->SetIsBillboard(true);
+	tex->SetColor({ 1.0f,0.0,0.0f,1.0f });
 }
 
 void FirstStageActor::Finalize() {
@@ -52,14 +62,17 @@ void FirstStageActor::Finalize() {
 void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	//関数ポインタで状態管理
 	(this->*stateTable[static_cast<size_t>(m_SceneState)])(camera);
+
+	//各クラス更新
 	camerawork->Update(camera);
+	lightgroup->Update();
 	ground->Update();
 	skydome->Update();
 	m_AddOffset.x = 0.001f;
 	ground->SetAddOffset(m_AddOffset.x);
 	Player::GetInstance()->Update();
 	enemy->Update();
-	lightgroup->Update();
+	tex->Update();
 }
 
 void FirstStageActor::Draw(DirectXCommon* dxCommon) {
@@ -98,6 +111,10 @@ void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	Player::GetInstance()->Draw(dxCommon);
 	enemy->Draw(dxCommon);
 	IKEObject3d::PostDraw();
+
+	IKETexture::PreDraw2(dxCommon, AlphaBlendType);
+	tex->Draw();
+	IKETexture::PostDraw();
 }
 //導入しーんの更新
 void FirstStageActor::IntroUpdate(DebugCamera* camera) {

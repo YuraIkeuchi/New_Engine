@@ -63,6 +63,7 @@ void Framework::Initialize(DirectXCommon* dxCommon)
 	//リソースマネージャーの読み込み
 	ModelManager::GetInstance()->StartInitialize();
 	ImageManager::GetInstance()->StartLoad2D();
+	ImageManager::GetInstance()->StartLoadTex2D();
 	AudioManager::GetInstance()->StartLoadAudio();
 	//シャドウマップの共通初期化
 	ShadowMap::ShadowMapCommon(dxcommon->GetDev(),dxcommon->GetCmdList());

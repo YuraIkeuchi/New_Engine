@@ -23,6 +23,7 @@ public:
 	//テクスチャの名前
 	enum tex2dName
 	{
+		MAGIC,
 	};
 	enum particleName
 	{

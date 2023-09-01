@@ -19,6 +19,8 @@ void ImageManager::SecondLoad2D()
 //テクスチャの読み込み
 void ImageManager::StartLoadTex2D()
 {
+	IKETexture::LoadTexture(MAGIC, L"Resources/2d/objicon/magic.png");
+
 }
 
 //非同期処理でのテクスチャの読み込み
