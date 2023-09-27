@@ -5,7 +5,7 @@
 #include "NormalEnemy.h"
 #include<windows.h>
 #include<vector>
-
+#include <array>
 class FirstStageActor :public BaseActor
 {
 public:
@@ -31,7 +31,8 @@ private:
 	IKEModel* model;
 	unique_ptr<IKEObject3d> skydome;
 	XMFLOAT2 m_AddOffset = {};
-	unique_ptr<InterEnemy> enemy;
+
+	array<unique_ptr<InterEnemy>,500> enemy;
 	unique_ptr<IKETexture> tex;
 };
 

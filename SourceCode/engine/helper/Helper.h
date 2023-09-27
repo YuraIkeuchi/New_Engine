@@ -1,6 +1,7 @@
 #pragma once
 #include "Camera.h"
 #include "WinApp.h"
+#include <random>
 /*--円周とか求める用--*/
 #define PI 3.14f
 #define PI_90 90.00f
@@ -32,6 +33,8 @@ public:
 	template<typename T>
 	bool CheckMin(T& Num, const T Min, const T Add);
 	bool FrameCheck(float& frame, const float addframe);
+	//ランダム関数
+	int GetRanNum(int min, int max);
 	//Clampを返す関数
 	template<typename T>
 	void Clamp(T& Num, const T Min, const T Max);
@@ -143,4 +146,16 @@ inline bool Helper::CheckMin(T& Num, const T Min, const T Add) {
 	}
 
 	return false;
+}
+//乱数
+inline int Helper::GetRanNum(int min, int max)
+{
+	// 乱数エンジンのシード値
+	std::random_device randev;
+	// メルセンヌ・ツイスター
+	std::mt19937 eng(randev());
+	// 範囲
+	std::uniform_int_distribution<int> dist(min, max);
+
+	return dist(eng);
 }

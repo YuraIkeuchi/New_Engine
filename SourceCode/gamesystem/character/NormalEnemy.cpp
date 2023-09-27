@@ -22,6 +22,12 @@ bool NormalEnemy::Initialize() {
 	m_Scale = { 0.5f,0.5f,0.5f };
 	m_Rotation = { 0.0f,90.0f,0.0f };
 
+	XMFLOAT3 m_RandPos = {};
+	m_RandPos.x = static_cast<float>(Helper::GetInstance()->GetRanNum(-15, 15));
+	m_RandPos.y = static_cast<float>(Helper::GetInstance()->GetRanNum(0, 20));
+	m_RandPos.z = static_cast<float>(Helper::GetInstance()->GetRanNum(-10, 20));
+	m_Position = m_RandPos;
+
 	return true;
 }
 

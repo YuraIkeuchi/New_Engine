@@ -4,7 +4,7 @@
 #include "ImageManager.h"
 #include "Player.h"
 #include "Helper.h"
-
+#include "FPSManager.h"
 void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	dxCommon->SetFullScreen(true);
 	//共通の初期化
@@ -44,8 +44,10 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	Player::GetInstance()->Initialize();
 
 	//敵
-	enemy.reset(new NormalEnemy());
-	enemy->Initialize();
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i].reset(new NormalEnemy());
+		enemy[i]->Initialize();
+	}
 
 	//テクスチャ
 	tex.reset(IKETexture::Create(ImageManager::MAGIC, { 0,0,0 }, { 0.5f,0.5f,0.5f }, { 1,1,1,1 }));
@@ -71,7 +73,9 @@ void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 	m_AddOffset.x = 0.001f;
 	ground->SetAddOffset(m_AddOffset.x);
 	Player::GetInstance()->Update();
-	enemy->Update();
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->Update();
+	}
 	tex->Update();
 }
 
@@ -109,7 +113,9 @@ void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	ground->Draw();
 	skydome->Draw();
 	//Player::GetInstance()->Draw(dxCommon);
-	enemy->Draw(dxCommon);
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->Draw(dxCommon);
+	}
 	IKEObject3d::PostDraw();
 
 	IKETexture::PreDraw2(dxCommon, AlphaBlendType);
@@ -135,6 +141,6 @@ void FirstStageActor::ImGuiDraw() {
 	ImGui::Text("SkydomeNum:%d", skydome->GetVertexNum());
 	ImGui::End();
 
-	enemy->ImGuiDraw();
 	Player::GetInstance()->ImGuiDraw();
+	FPSManager::GetInstance()->ImGuiDraw();
 }
