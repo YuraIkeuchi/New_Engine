@@ -19,6 +19,8 @@ bool NormalEnemy::Initialize() {
 	m_Object->SetPosition({ 0.0f,0.0f,20.0f });
 	m_Object->SetColor({ 1.0f,0.0f,0.0,1.0f });
 	m_Object->VertexCheck();
+	m_Scale = { 0.5f,0.5f,0.5f };
+	m_Rotation = { 0.0f,90.0f,0.0f };
 
 	return true;
 }
@@ -33,7 +35,7 @@ void (NormalEnemy::* NormalEnemy::stateTable[])() = {
 //s“®
 void NormalEnemy::Action() {
 	(this->*stateTable[_charaState])();
-
+	m_Rotation.y += 2.0f;
 	Obj_SetParam();
 }
 //•`‰æ

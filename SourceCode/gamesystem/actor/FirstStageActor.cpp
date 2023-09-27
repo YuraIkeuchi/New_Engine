@@ -108,7 +108,7 @@ void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	IKEObject3d::PreDraw();
 	ground->Draw();
 	skydome->Draw();
-	Player::GetInstance()->Draw(dxCommon);
+	//Player::GetInstance()->Draw(dxCommon);
 	enemy->Draw(dxCommon);
 	IKEObject3d::PostDraw();
 
